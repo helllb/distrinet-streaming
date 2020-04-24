@@ -2,7 +2,7 @@
 Streaming emulation with Distrinet on [R2Lab](https://r2lab.inria.fr)
 
 ## About
-This project serves as a use case for a future patch to Distrinet that will introduce accuracy and fidelity monitoring with a focus on reproducibility. It emulates a simple network topology and runs a streaming experiment on it.
+This project serves as a use case for a future patch to [Distrinet](https://distrinet-emu.github.io) that will introduce accuracy and fidelity monitoring with a focus on reproducibility. It emulates a simple network topology and runs a streaming experiment on it.
 
 ## Prerequisites
 The scripts here use [apssh](https://github.com/parmentelat/apssh) and [asynciojobs](https://github.com/parmentelat/asynciojobs) to remotely run parallel commands on a number of nodes. First make sure you have a recent version of Python (>= 3.6), then install those on your computer:
