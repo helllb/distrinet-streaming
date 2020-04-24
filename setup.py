@@ -89,7 +89,7 @@ for i in range(1, workers+1):
 tarballs_script = read_from_file('tarballs_script.sh')
 load_tarballs = SshJob (
 		node = faraday,
-        command = RunString(tarballs_script),
+        command = RunString(tarballs_script, workers),
         required = tuple(net_intfs),
         scheduler = scheduler
 )
