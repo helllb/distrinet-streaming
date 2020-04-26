@@ -84,27 +84,28 @@ for i in range(1, workers+1):
 
 # -------------
 
-# Loading image tarballs
-
-tarballs_script = read_from_file('tarballs_script.sh')
-load_tarballs = SshJob (
-		node = faraday,
-        command = RunString(tarballs_script, workers),
-        required = tuple(net_intfs),
-        scheduler = scheduler
-)
-
-# -------------
-
 # Installing Distrinet in the client/master node
 
 install_script = read_from_file('install_script.sh')
 install = SshJob (
         node = nodes['fit01'],
         command = RunString(install_script),
-        required = load_tarballs,
+        required = tuple(net_intfs),
         scheduler = scheduler
 )
+
+# -------------
+
+# Loading image tarballs
+
+load_tarballs = SshJob (
+		node = faraday,
+        command = Run('scp', '-o StrictHostKeyChecking=no', '~/Streaming/*.tar.gz', 'root@fit01:'),
+        required = install,
+        scheduler = scheduler
+)
+
+# -------------
 
 # Configuring the worker nodes for Distrinet
 
@@ -112,7 +113,7 @@ config_script = read_from_file('config_script.sh')
 config = SshJob (
         node = nodes['fit01'],
         command = RunString(config_script, workers),
-        required = install
+        required = (install, load_tarballs),
         scheduler = scheduler
 )
 
