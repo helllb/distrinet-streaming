@@ -78,15 +78,19 @@ experiment = SshJob (
 		commands = [
 			Run('nohup ryu-manager', 
 				'/usr/lib/python3/dist-packages/ryu/app/simple_switch_13.py',
-				'--verbose &'),
+				'> ryu.out 2> ryu.err < /dev/null &'),
 			Run('cd ~/Distrinet/mininet;',
-				'python3', 'bin/dmn',
+				'export PYTHONPATH;',
+				'python3 bin/dmn',
 				'--bastion=10.10.20.1',
 				'--workers="%s"' % ips, 
 				'--controller=lxcremote,ip=192.168.0.1',
-				'--custom=~/Distrinet/mininet/custom/streaming.py',
+				'--custom=custom/streaming.py',
 				'--topo=pods,%i,%i,%i,%i,%i,%s' % (p, n, m, cbw, sbw, d),
-				'--test=streaming')
+				'--test=streaming'),
+				# '--custom=custom/iperf_test.py',
+				# '--test=iperfall'),
+			Run('pkill -SIGKILL ryu'),
 			],
 		required = check_lease,
 		scheduler = scheduler
@@ -94,9 +98,18 @@ experiment = SshJob (
 
 # -------------
 
-# Download captures
+# Download captures and errors
 
-
+download = SshJob (
+		node = faraday,
+		commands = [
+			Run('rm', '-rf', 'captures/*', 'errors/*'),
+			Run('scp', 'root@fit01:/root/captures/*', '~/Streaming/captures/'),
+			Run('scp', 'root@fit01:/root/errors/*', '~/Streaming/errors/')
+		],
+		required = experiment,
+		scheduler = scheduler
+)
 
 #--------------
 

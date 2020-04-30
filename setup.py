@@ -37,7 +37,7 @@ for i in range(1, workers+1):
 
 # -------------
 
-# Sheduler object
+# Sheduler
 
 scheduler = Scheduler()
 
@@ -59,7 +59,7 @@ load_images = SshJob (
 			Run("rload -i u18.04 %s" % ' '.join([get_node_name(i) for i in range(1, workers+1)])),
 			#Run("rwait %i-%i" % (1, workers)),
 			Run("rwait %s" % ' '.join([get_node_name(i) for i in range(1, workers+1)])),
-			Run("sleep 5")
+			Run("sleep 60")
 		],
 		required = check_lease,
 		scheduler = scheduler
@@ -124,6 +124,7 @@ config = SshJob (
 streaming = SshJob (
 		node = nodes['fit01'],
 		commands = [
+			Run('mkdir', '/root/captures', '/root/errors'),
 			Push(localpaths=['streaming.py'], remotepath='/root/Distrinet/mininet/custom/'),
 			Run('echo "PYTHONPATH=$PYTHONPATH:mininet" >> ~/.bashrc')
 			],
@@ -131,20 +132,20 @@ streaming = SshJob (
 		scheduler = scheduler
 )
 
-preps = []
-for i in range(1, workers+1):
-	node_name = get_node_name(i)
-	node = nodes[node_name]
-	prep = SshJob (
-			node = node,
-			commands = [
-				Run('mkdir', '/root/input_streams', '/root/output_streams', '/root/captures'),
-				Push(localpaths=[sample], remotepath='/root/input_streams/')
-			],
-			required = config,
-			scheduler = scheduler
-	)
-	preps.append(prep)
+# preps = []
+# for i in range(1, workers+1):
+# 	node_name = get_node_name(i)
+# 	node = nodes[node_name]
+# 	prep = SshJob (
+# 			node = node,
+# 			commands = [
+# 				Run('mkdir', '/root/input_streams', '/root/output_streams', '/root/captures', '/root/errors'),
+# 				Push(localpaths=[sample], remotepath='/root/input_streams/')
+# 			],
+# 			required = config,
+# 			scheduler = scheduler
+# 	)
+# 	preps.append(prep)
 
 #--------------
 
