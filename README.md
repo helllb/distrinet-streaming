@@ -24,7 +24,8 @@ Once the nodes are correctly set up, you can run the experiment with:
 python3 experiment.py --cfg=config.ini
 ```
 Make sure to edit the INI file with the desired emulated network parameters (size and capacity).
-Each emulated node will capture all the packets it will send and receive during the experiment. Those will be automatically downloaded to your computer for analysis.
+
+Each physical node will log its CPU usage throughout the run, and each emulated client will capture all the packets it will send and receive during the experiment. Those will be automatically downloaded to your computer for analysis. 
 
 ## Documentation
 ### Network Topology
