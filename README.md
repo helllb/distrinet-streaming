@@ -38,7 +38,7 @@ The core network can be specified in a `.net` file, which contains the graph enc
 
 The access layer consists of multiple switches connected to the core network. And each access switch provides connectivity to a certain number of clients. The size of the access network and the parameters of its links can be specified in the configuration file.
 
-`france.net` is an example of such network file. It is a simplified version of a french TelCo-CDN topology [[1]](#1). 
+`france.net` is an example of such network file. It is a simplified version of a french TelCo-CDN topology [[1]](#1). Its relatively large size makes it a good candidate for large-scale experimentation. Another interesting although smaller network is the TelCo-CDN of the US east coast [[2]](#2).
 
 ## Emulated Scenario
 The experiment emulates a country-wide network where users can stream on-demand videos stored in data centers from servers that provide them. Throughout the duration of the emulation, each user will uniform-randomly select a certain video from a catalog and play it uninterrupted on her client streaming application (since the users are emulated by display-less virtual hosts, the video stream is simply redirected to a local file). After each video, the user will wait for an exponentially-distributed random amount of time before watching the next one.
@@ -47,6 +47,8 @@ To allow reproducibility, random phenomena can be controlled by specifiying a se
 
 28/03: The catalog of available videos is currently hardcoded into the experiment and cannot be modified. It consists of six videos 7 to 36 seconds long, all of which were freely downloaded from an [online stock footage repository](https://mixkit.co/free-stock-video/).
 
-28/03: [VLC](https://www.videolan.org) is used as VoD RTSP streaming tool for both clients and servers. No adaptive streaming involved; all videos are only available in a single high-resolution bitrate.
+28/03: [VLC](https://www.videolan.org) is used as VoD RTSP streaming by both clients and servers. No adaptive streaming involved; all videos are only available in a single high-resolution bitrate.
 
 <a id="1">[1]</a> Z. Li and G. Simon, "[In a Telco-CDN, Pushing Content Makes Sense](https://hal.archives-ouvertes.fr/hal-00908767)," in IEEE Transactions on Network and Service Management, vol. 10, no. 3, pp. 300-311, September 2013, doi: 10.1109/TNSM.2013.043013.130474.
+
+<a id="2">[2]</a> K. Diab and M. Hefeeda, "[Joint Content Distribution and Traffic Engineering of Adaptive Videos in Telco-CDNs](https://ieeexplore.ieee.org/abstract/document/8737635)," IEEE INFOCOM 2019 - IEEE Conference on Computer Communications, Paris, France, 2019, pp. 1342-1350, doi: 10.1109/INFOCOM.2019.8737635.
