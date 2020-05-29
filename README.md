@@ -37,7 +37,7 @@ The core network can be specified in a `.net` file, which contains the graph enc
 
 The access layer consists of multiple switches connected to the core network. And each access switch provides connectivity to a certain number of clients. The size of the access network and the parameters of its links can be specified in the configuration file.
 
-`france.net` is an example of such network file. It is a simplified version of a french TelCo-CDN topology [[1]]. 
+`france.net` is an example of such network file. It is a simplified version of a french TelCo-CDN topology [[1]](#1). 
 
 ## Emulated Scenario
 The experiment emulates a country-wide network where users can stream on-demand videos stored in data centers from servers that provide them. Throughout the duration of the emulation, each user will uniform-randomly select a certain video from a catalog and play it uninterrupted on her client streaming application (since the users are emulated by display-less virtual hosts, the video stream is simply redirected to a local file). After each video, the user will wait for an exponentially-distributed random amount of time before watching the next one.
@@ -48,4 +48,4 @@ To allow reproducibility, random phenomena can be controlled by specifiying a se
 
 28/03: [VLC](https://www.videolan.org) is used as VoD RTSP streaming tool for both clients and servers. No adaptive streaming involved; all videos are only available in a single high-resolution bitrate.
 
-[[1]] Z. Li and G. Simon, "[In a Telco-CDN, Pushing Content Makes Sense](https://hal.archives-ouvertes.fr/hal-00908767)," in IEEE Transactions on Network and Service Management, vol. 10, no. 3, pp. 300-311, September 2013, doi: 10.1109/TNSM.2013.043013.130474.
+<a id="1">[1]</a> Z. Li and G. Simon, "[In a Telco-CDN, Pushing Content Makes Sense](https://hal.archives-ouvertes.fr/hal-00908767)," in IEEE Transactions on Network and Service Management, vol. 10, no. 3, pp. 300-311, September 2013, doi: 10.1109/TNSM.2013.043013.130474.
