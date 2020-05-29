@@ -35,7 +35,13 @@ The core network can be specified in a `.net` file, which contains the graph enc
 - second line is a sequence of whitespace (` `)-separated integers 0 < dc1, dc2, ..., dck < N indicating that data centers are located in nodes dc1, dc2, ..., dck
 - each remaining line is a sequence of four whitspace-separated positive integers u, v, bw, d indicating that nodes u and v of your graph are connected by a link of capacity bw (in Mbps) and delay d (in ms)
 
-The access layer consists of multiple switches connected to the core network. Then each access switch provides connectivity to a certain number of clients. The size of the access network and the parameters of its links can be specified in the INI file.
+The access layer consists of multiple switches connected to the core network. Then each access switch provides connectivity to a certain number of clients. The size of the access network and the parameters of its links can be specified in the configuration file.
 
 ## Emulated Scenario
-The experiment emulates a country-wide network where users can stream on-demand videos from servers that provide them. 
+The experiment emulates a country-wide network where users can stream on-demand videos from servers that provide them. Throughout the duration of the emulation, each user will uniform-randomly select a certain video from a catalog and play it uninterrupted on her client streaming application (since the users are emulated by display-less virtual hosts, the video stream is simply redirected to a local file). After each video, the user will wait for an exponentially-distributed random amount of time before watching the next one.
+The parameters of this scenario (total duration and average waiting time) can be specified in the configuration file.
+To allow reproducibility, random phenomena can be controlled by specifiying a seed (in the configuration file) for the pseudo-RNG.
+
+28/03: The catalog of available videos is currently hardcoded into the experiment and cannot be modified. It consists of six videos 7 to 36 seconds long, all of which were freely downloaded from an [online stock footage repository](https://mixkit.co/free-stock-video/).
+
+28/03: VLC is used as VoD RTSP streaming tool for both clients and servers. No adaptive streaming involved; all videos are only available in one high-resolution bitrate.
