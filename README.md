@@ -25,3 +25,17 @@ python3 experiment.py --cfg=config.ini
 ```
 Make sure to edit the INI file with the desired emulated network parameters (size and capacity).
 Each emulated node will capture all the packets it will send and receive during the experiment. Those will be automatically downloaded to your computer for analysis.
+
+## Documentation
+### Network Topology
+The emulated network is built from a two-tier topology.
+
+The core network can be specified in a `.net` file, which contains the graph encoding of the topology, and the location of your network's data centers. This file must conform to the following edge list format:
+- first line is a single integer N > 1 equal to the number of your graph vertices (which correspond to your network's core switches)
+- second line is a sequence of whitespace (` `)-separated integers 0 < dc1, dc2, ..., dck < N indicating that data centers are located in nodes dc1, dc2, ..., dck
+- each remaining line is a sequence of four whitspace-separated positive integers u, v, bw, d indicating that nodes u and v of your graph are connected by a link of capacity bw (in Mbps) and delay d (in ms)
+
+The access layer consists of multiple switches connected to the core network. Then each access switch provides connectivity to a certain number of clients. The size of the access network and the parameters of its links can be specified in the INI file.
+
+## Emulated Scenario
+The experiment emulates a country-wide network where users can stream on-demand videos from servers that provide them. 
