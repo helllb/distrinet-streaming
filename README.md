@@ -40,14 +40,16 @@ The access layer consists of multiple switches connected to the core network. An
 
 `france.net` is an example of such network file. It is a simplified version of a french TelCo-CDN topology [[1]](#1). Its relatively large size makes it a good candidate for large-scale experimentation. Another interesting although smaller network is the TelCo-CDN of the US east coast [[2]](#2).
 
+28/05: The core switches are not configured with a multi-path routing mecanism. If your topology contains redundant paths, those will be simply deactivated by the switches' STP.
+
 ## Emulated Scenario
 The experiment emulates a country-wide network where users can stream on-demand videos stored in data centers from servers that provide them. Throughout the duration of the emulation, each user will uniform-randomly select a certain video from a catalog and play it uninterrupted on her client streaming application (since the users are emulated by display-less virtual hosts, the video stream is simply redirected to a local file). After each video, the user will wait for an exponentially-distributed random amount of time before watching the next one.
 The parameters of this scenario (total duration and average waiting time) can be specified in the configuration file.
 To allow reproducibility, random phenomena can be controlled by specifiying a seed (in the configuration file) for the pseudo-RNG.
 
-28/03: The catalog of available videos is currently hardcoded into the experiment and cannot be modified. It consists of six videos 7 to 36 seconds long, all of which were freely downloaded from an [online stock footage repository](https://mixkit.co/free-stock-video/).
+28/05: The catalog of available videos is currently hardcoded into the experiment and cannot be modified. It consists of six videos 7 to 36 seconds long, all of which were freely downloaded from an [online stock footage repository](https://mixkit.co/free-stock-video/).
 
-28/03: [VLC](https://www.videolan.org) is used as VoD RTSP streaming by both clients and servers. No adaptive streaming involved; all videos are only available in a single high-resolution bitrate.
+28/05: [VLC](https://www.videolan.org) is used as VoD RTSP streaming by both clients and servers. No adaptive streaming involved; all videos are only available in a single high-resolution bitrate.
 
 <a id="1">[1]</a> Z. Li and G. Simon, "[In a Telco-CDN, Pushing Content Makes Sense](https://hal.archives-ouvertes.fr/hal-00908767)," in IEEE Transactions on Network and Service Management, vol. 10, no. 3, pp. 300-311, September 2013, doi: 10.1109/TNSM.2013.043013.130474.
 
