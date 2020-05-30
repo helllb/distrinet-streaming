@@ -44,7 +44,9 @@ The access layer consists of multiple switches connected to the core network. An
 
 ## Emulated Scenario
 The experiment emulates a country-wide network where users can stream on-demand videos stored in data centers from servers that provide them. Throughout the duration of the emulation, each user will uniform-randomly select a certain video from a catalog and play it uninterrupted on her client streaming application (since the users are emulated by display-less virtual hosts, the video stream is simply redirected to a local file). After each video, the user will wait for an exponentially-distributed random amount of time before watching the next one.
+
 The parameters of this scenario (total duration and average waiting time) can be specified in the configuration file.
+
 To allow reproducibility, random phenomena can be controlled by specifiying a seed (in the configuration file) for the pseudo-RNG.
 
 28/05: The catalog of available videos is currently hardcoded into the experiment and cannot be modified. It consists of six videos 7 to 36 seconds long, all of which were freely downloaded from an [online stock footage repository](https://mixkit.co/free-stock-video/).
